@@ -1,28 +1,6 @@
-const path = require('path');
-const webpack = require('webpack');
-
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const CopywebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
-    output: {
-        // Needed to compile multiline strings in Cesium
-        sourcePrefix: ''
-    },
-    amd: {
-        // Enable webpack-friendly use of require in Cesium
-        toUrlUndefined: true
-    },
-    node: {
-        // Resolve node module use of fs
-        fs: 'empty'
-    },
-    resolve: {
-        alias: {
-            '$': 'jquery',
-            'jQuery': 'jquery'
-        }
-    },
     plugins: [
         new HtmlWebpackPlugin({
             title: 'TDD Challenge',
@@ -30,8 +8,6 @@ module.exports = {
                 viewport: 'width=device-width, initial-scale=1'
             }
         }),
-        // Copy Cesium Assets, Widgets, and Workers to a static directory
-        new CopywebpackPlugin([ { from: path.join('src', 'assets'), to: 'assets' } ]),
     ],
     module: {
         rules: [
