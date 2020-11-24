@@ -13,6 +13,10 @@ template.innerHTML = `
     bottom: 0;
 }
 
+.overlay-hidden {
+    display: none;
+}
+
 .content {
     background-color: white;
     width: 250px;
@@ -20,7 +24,7 @@ template.innerHTML = `
 }
 </style>
 
-<div class="overlay">
+<div class="overlay overlay-hidden">
     <div class="content"></div>
 </div>
 `;

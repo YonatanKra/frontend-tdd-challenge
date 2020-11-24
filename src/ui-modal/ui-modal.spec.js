@@ -80,4 +80,15 @@ describe('UiModal', () => {
         expect(contentStyles.getPropertyValue('width')).toEqual('250px');
         expect(contentStyles.getPropertyValue('height')).toEqual('250px');
     });
+
+    it('should be invisible on init', () => {
+        const modal = window.document.createElement('ui-modal');
+
+        document.body.appendChild(modal);
+
+        const overlay = modal.shadowRoot.querySelector('.overlay');
+        const overlayStyles = getComputedStyle(overlay);
+
+        expect(overlayStyles.display).toEqual('none');
+    });
 });
