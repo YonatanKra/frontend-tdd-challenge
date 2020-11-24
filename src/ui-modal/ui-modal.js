@@ -12,6 +12,10 @@ template.innerHTML = `
     top: 0;
     bottom: 0;
 }
+
+.content {
+    background-color: white;
+}
 </style>
 
 <div class="overlay">
