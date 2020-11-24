@@ -104,4 +104,17 @@ describe('UiModal', () => {
         const overlayStyles = getComputedStyle(overlay);
         expect(overlayStyles.display).not.toEqual('none');
     });
+
+    it('gets a string of HTML and add it to the content area', () => {
+        const modal = window.document.createElement('ui-modal');
+
+        document.body.appendChild(modal);
+
+        const stringOfHtml = '<b>Some bold text</b>';
+        
+        modal.open(stringOfHtml);
+
+        const content = modal.shadowRoot.querySelector('.content');
+        expect(content.innerHTML).toEqual(stringOfHtml);
+    });
 });

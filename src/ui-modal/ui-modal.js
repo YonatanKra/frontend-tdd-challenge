@@ -40,8 +40,10 @@ export class UiModal extends HTMLElement {
         this._shadowRoot.appendChild(template.content.cloneNode(true));
     }
 
-    open() {
+    open(innerHTML) {
         this._shadowRoot.querySelector('.overlay.overlay-hidden').className = 'overlay';
+
+        this._shadowRoot.querySelector('.content').innerHTML = innerHTML;
     }
 }
 
