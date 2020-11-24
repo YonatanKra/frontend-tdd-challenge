@@ -43,4 +43,16 @@ describe('UiModal', () => {
         expect(overlay.children[0]).toEqual(content[0]);
         expect(content[0].parentElement).toEqual(overlay);
     });
+
+    it('s content area should be in the center of the screen', () => {
+        const modal = window.document.createElement('ui-modal');
+
+        document.body.appendChild(modal);
+
+        const overlay = modal.shadowRoot.querySelector('.overlay');
+
+        const overlayStyles = getComputedStyle(overlay);
+        expect(overlayStyles.getPropertyValue('justify-content')).toEqual('center');
+        expect(overlayStyles.getPropertyValue('align-items')).toEqual('center');
+    });
 });

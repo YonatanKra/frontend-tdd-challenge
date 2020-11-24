@@ -2,6 +2,9 @@ const template = document.createElement('template');
 template.innerHTML = `
 <style>
 .overlay {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     background-color: rgba(0, 0, 0, 0.42);
     position: fixed;
     left: 0;
