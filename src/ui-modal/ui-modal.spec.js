@@ -91,4 +91,17 @@ describe('UiModal', () => {
 
         expect(overlayStyles.display).toEqual('none');
     });
+
+    it('turns the modal visible', () => {
+        const modal = window.document.createElement('ui-modal');
+
+        document.body.appendChild(modal);
+
+        const overlay = modal.shadowRoot.querySelector('.overlay');
+        
+        modal.open();
+
+        const overlayStyles = getComputedStyle(overlay);
+        expect(overlayStyles.display).not.toEqual('none');
+    });
 });

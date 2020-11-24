@@ -33,11 +33,15 @@ export class UiModal extends HTMLElement {
     constructor() {
         super();
 
-        const shadowRoot = this.attachShadow({
+        this._shadowRoot = this.attachShadow({
             mode: 'open'
         });
 
-        shadowRoot.appendChild(template.content.cloneNode(true));
+        this._shadowRoot.appendChild(template.content.cloneNode(true));
+    }
+
+    open() {
+        this._shadowRoot.querySelector('.overlay.overlay-hidden').className = 'overlay';
     }
 }
 
