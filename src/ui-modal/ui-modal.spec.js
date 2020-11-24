@@ -68,19 +68,6 @@ describe('UiModal', () => {
         expect(contentStyles.getPropertyValue('background-color')).toEqual('rgb(255, 255, 255)');
     });
 
-    it(`s content's dimensions should be 250x250 px`, () => {
-        const modal = window.document.createElement('ui-modal');
-
-        document.body.appendChild(modal);
-
-        const overlay = modal.shadowRoot.querySelector('.overlay');
-        const content = overlay.querySelector('.content');
-
-        const contentStyles = getComputedStyle(content);
-        expect(contentStyles.getPropertyValue('width')).toEqual('250px');
-        expect(contentStyles.getPropertyValue('height')).toEqual('250px');
-    });
-
     it('should be invisible on init', () => {
         const modal = window.document.createElement('ui-modal');
 
@@ -116,6 +103,21 @@ describe('UiModal', () => {
 
         const content = modal.shadowRoot.querySelector('.content');
         expect(content.innerHTML).toEqual(stringOfHtml);
+    });
+
+    it(`should get width and height parameters and set the content's area accordingly`, () => {
+        const modal = window.document.createElement('ui-modal');
+
+        document.body.appendChild(modal);
+
+        modal.open('Text', 420, 666);
+
+        const overlay = modal.shadowRoot.querySelector('.overlay');
+        const content = overlay.querySelector('.content');
+
+        const contentStyles = getComputedStyle(content);
+        expect(contentStyles.getPropertyValue('width')).toEqual('420px');
+        expect(contentStyles.getPropertyValue('height')).toEqual('666px');
     });
 
     it('turns the modal invisible', () => {

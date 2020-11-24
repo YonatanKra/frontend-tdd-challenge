@@ -19,8 +19,6 @@ template.innerHTML = `
 
 .content {
     background-color: white;
-    width: 250px;
-    height: 250px;
 }
 </style>
 
@@ -40,10 +38,14 @@ export class UiModal extends HTMLElement {
         this._shadowRoot.appendChild(template.content.cloneNode(true));
     }
 
-    open(innerHTML) {
+    open(innerHTML, width, height) {
         this._shadowRoot.querySelector('.overlay.overlay-hidden').className = 'overlay';
 
-        this._shadowRoot.querySelector('.content').innerHTML = innerHTML;
+        const content = this._shadowRoot.querySelector('.content');
+
+        content.innerHTML = innerHTML;
+        content.style.width = `${width}px`;
+        content.style.height = `${height}px`;
     }
 
     close() {
