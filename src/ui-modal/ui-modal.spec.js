@@ -103,6 +103,16 @@ describe('UiModal', () => {
         expect(content.innerHTML).toEqual(stringOfHtml);
     });
 
+    it('throws if parameter for open method is not a string', () => {
+        const modal = createAndRenderModal();
+
+        const notStringOfHtml = 420;
+        
+        expect(() => {
+            modal.open(notStringOfHtml);
+        }).toThrowError(`innerHTML argument has to be a string. 'number' given`);
+    });
+
     it(`should get width and height parameters and set the content's area accordingly`, () => {
         const modal = createAndRenderModal();
 
@@ -129,6 +139,26 @@ describe('UiModal', () => {
         expect(contentStyles.getPropertyValue('height')).toEqual('250px');
     });
 
+    it(`should throw the error if width is not a number type`, () => {
+        const modal = createAndRenderModal();
+
+        const notNumber = 'notNumber';
+
+        expect(() => {
+            modal.open('Text', notNumber, 666);
+        }).toThrowError(`width argument has to be a number. 'string' given`);
+    });
+
+    it(`should throw the error if height is not a number type`, () => {
+        const modal = createAndRenderModal();
+
+        const notNumber = 'notNumber';
+
+        expect(() => {
+            modal.open('Text', 420, notNumber);
+        }).toThrowError(`height argument has to be a number. 'string' given`);
+    });
+
     it(`should get a background property and set the content's area's background accordingly`, () => {
         const modal = createAndRenderModal();
 
@@ -139,6 +169,14 @@ describe('UiModal', () => {
 
         const contentStyles = getComputedStyle(content);
         expect(contentStyles.getPropertyValue('background-color')).toEqual('rgb(255, 0, 0)');
+    });
+
+    it(`should throw the error if background property is not a valid color`, () => {
+        const modal = createAndRenderModal();
+
+        expect(() => {
+            modal.open('Text', 420, 666, 'niekolor');
+        }).toThrowError('');
     });
 
     it(`should get a showOverlay property and show/hide the overlay accordingly - true`, () => {

@@ -1,3 +1,5 @@
+import { isColor } from "./is-color";
+
 const template = document.createElement('template');
 template.innerHTML = `
 <style>
@@ -39,6 +41,19 @@ export class UiModal extends HTMLElement {
     }
 
     open(innerHTML, width = 250, height = 250, background = "rgba(255, 255, 255)", showOverlay = true) {
+        if (innerHTML && typeof innerHTML !== 'string') {
+            throw new Error(`innerHTML argument has to be a string. '${typeof innerHTML}' given`);
+        }
+        if (width && typeof width !== 'number') {
+            throw new Error(`width argument has to be a number. '${typeof width}' given`);
+        }
+        if (height && typeof height !== 'number') {
+            throw new Error(`height argument has to be a number. '${typeof height}' given`);
+        }
+        if (background && !isColor(background)) {
+            throw new Error(`background argument has to be a valid color. ${background} given`);
+        }
+
         const overlay = this._shadowRoot.querySelector('.overlay.overlay-hidden')
         overlay.className = 'overlay';
         overlay.style.background = showOverlay ? 'rgba(0, 0, 0, 0.42)' : 'rgba(0, 0, 0, 0)'; 
