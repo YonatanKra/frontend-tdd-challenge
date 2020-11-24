@@ -25,7 +25,7 @@ describe('isColor', () => {
     ]
 
     invalid.forEach((example) => {
-        it(`${example} - should be valid color`, () => {
+        it(`${example} - should be invalid color`, () => {
             expect(isColor(example)).toEqual(false);
         });
     });
