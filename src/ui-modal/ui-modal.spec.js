@@ -33,4 +33,14 @@ describe('UiModal', () => {
         const backgroundColor = getComputedStyle(overlay).getPropertyValue('background-color');
         expect(backgroundColor).toEqual('rgba(0, 0, 0, 0.42)');
     });
+
+    it('s content area should appear above the overlay', () => {
+        const modal = window.document.createElement('ui-modal');
+        const overlay = modal.shadowRoot.querySelector('.overlay');
+        const content = overlay.querySelectorAll('.content');
+
+        expect(content.length).toEqual(1);
+        expect(overlay.children[0]).toEqual(content[0]);
+        expect(content[0].parentElement).toEqual(overlay);
+    });
 });
