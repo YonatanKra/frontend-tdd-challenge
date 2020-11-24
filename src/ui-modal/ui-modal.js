@@ -5,7 +5,6 @@ template.innerHTML = `
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: rgba(0, 0, 0, 0.42);
     position: fixed;
     left: 0;
     right: 0;
@@ -38,14 +37,17 @@ export class UiModal extends HTMLElement {
         this._shadowRoot.appendChild(template.content.cloneNode(true));
     }
 
-    open(innerHTML, width, height) {
-        this._shadowRoot.querySelector('.overlay.overlay-hidden').className = 'overlay';
+    open(innerHTML, width = 250, height = 250, background = "rgba(255, 255, 255)", showOverlay = true) {
+        const overlay = this._shadowRoot.querySelector('.overlay.overlay-hidden')
+        overlay.className = 'overlay';
+        overlay.style.background = showOverlay ? 'rgba(0, 0, 0, 0.42)' : 'rgba(0, 0, 0, 0)'; 
 
         const content = this._shadowRoot.querySelector('.content');
 
         content.innerHTML = innerHTML;
         content.style.width = `${width}px`;
         content.style.height = `${height}px`;
+        content.style.background = background;
     }
 
     close() {

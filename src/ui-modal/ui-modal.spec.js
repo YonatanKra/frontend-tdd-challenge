@@ -23,10 +23,12 @@ describe('UiModal', () => {
         expect(content.length).toEqual(1);
     });
 
-    it('s overlay background color should be black with opacity (rgba(0, 0, 0, 0.42))', () => {
+    it('s overlay background color should be black with opacity (rgba(0, 0, 0, 0.42)) if not specified', () => {
         const modal = window.document.createElement('ui-modal');
 
         document.body.appendChild(modal);
+        
+        modal.open();
 
         const overlay = modal.shadowRoot.querySelector('.overlay');
 
@@ -118,6 +120,61 @@ describe('UiModal', () => {
         const contentStyles = getComputedStyle(content);
         expect(contentStyles.getPropertyValue('width')).toEqual('420px');
         expect(contentStyles.getPropertyValue('height')).toEqual('666px');
+    });
+
+    it(`should set the content's area to 250x250 pixels if not specified`, () => {
+        const modal = window.document.createElement('ui-modal');
+
+        document.body.appendChild(modal);
+
+        modal.open('Text');
+
+        const overlay = modal.shadowRoot.querySelector('.overlay');
+        const content = overlay.querySelector('.content');
+
+        const contentStyles = getComputedStyle(content);
+        expect(contentStyles.getPropertyValue('width')).toEqual('250px');
+        expect(contentStyles.getPropertyValue('height')).toEqual('250px');
+    });
+
+    it(`should get a background property and set the content's area's background accordingly`, () => {
+        const modal = window.document.createElement('ui-modal');
+
+        document.body.appendChild(modal);
+
+        modal.open('Text', 420, 666, 'rgb(255, 0, 0)');
+
+        const overlay = modal.shadowRoot.querySelector('.overlay');
+        const content = overlay.querySelector('.content');
+
+        const contentStyles = getComputedStyle(content);
+        expect(contentStyles.getPropertyValue('background-color')).toEqual('rgb(255, 0, 0)');
+    });
+
+    it(`should get a showOverlay property and show/hide the overlay accordingly - true`, () => {
+        const modal = window.document.createElement('ui-modal');
+
+        document.body.appendChild(modal);
+
+        modal.open('Text', 420, 666, 'rgb(255, 0, 0, 0.5)', true);
+
+        const overlay = modal.shadowRoot.querySelector('.overlay');
+
+        const overlayStyles = getComputedStyle(overlay);
+        expect(overlayStyles.getPropertyValue('background-color')).toEqual('rgba(0, 0, 0, 0.42)');
+    });
+
+    it(`should get a showOverlay property and show/hide the overlay accordingly - false`, () => {
+        const modal = window.document.createElement('ui-modal');
+
+        document.body.appendChild(modal);
+
+        modal.open('Text', 420, 666, 'rgb(255, 0, 0, 0.5)', false);
+
+        const overlay = modal.shadowRoot.querySelector('.overlay');
+
+        const overlayStyles = getComputedStyle(overlay);
+        expect(overlayStyles.getPropertyValue('background-color')).toEqual('rgba(0, 0, 0, 0)');
     });
 
     it('turns the modal invisible', () => {
