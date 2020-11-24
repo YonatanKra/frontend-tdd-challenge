@@ -189,4 +189,25 @@ describe('UiModal', () => {
         const overlayStyles = getComputedStyle(overlay);
         expect(overlayStyles.display).toEqual('none');
     });
+
+    it('s overlay area should appear above all content of the website', () => {
+        const modal = window.document.createElement('ui-modal');
+
+        document.body.appendChild(modal);
+
+        modal.open();
+
+        const overlay = modal.shadowRoot.querySelector('.overlay');
+        const overlayStyles = getComputedStyle(overlay);
+
+        var all = document.getElementsByTagName("*");
+
+        for (var i=0, max=all.length; i < max; i++) {
+            const nodeStyles = getComputedStyle(all[i]);
+
+            const calculatedZIndex = nodeStyles.zIndex === 'auto' ? 0 : nodeStyles.zIndex;
+
+            expect(overlayStyles.zIndex).toBeGreaterThan(calculatedZIndex);
+        }
+    });
 });
