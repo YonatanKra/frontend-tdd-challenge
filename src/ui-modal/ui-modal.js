@@ -45,6 +45,10 @@ export class UiModal extends HTMLElement {
 
         this._shadowRoot.querySelector('.content').innerHTML = innerHTML;
     }
+
+    close() {
+        this._shadowRoot.querySelector('.overlay').className = 'overlay overlay-hidden';
+    }
 }
 
 window.customElements.define('ui-modal', UiModal);

@@ -117,4 +117,17 @@ describe('UiModal', () => {
         const content = modal.shadowRoot.querySelector('.content');
         expect(content.innerHTML).toEqual(stringOfHtml);
     });
+
+    it('turns the modal invisible', () => {
+        const modal = window.document.createElement('ui-modal');
+
+        document.body.appendChild(modal);
+
+        modal.open();
+        modal.close();
+
+        const overlay = modal.shadowRoot.querySelector('.overlay');
+        const overlayStyles = getComputedStyle(overlay);
+        expect(overlayStyles.display).toEqual('none');
+    });
 });
