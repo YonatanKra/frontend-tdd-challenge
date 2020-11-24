@@ -67,4 +67,17 @@ describe('UiModal', () => {
         const contentStyles = getComputedStyle(content);
         expect(contentStyles.getPropertyValue('background-color')).toEqual('rgb(255, 255, 255)');
     });
+
+    it(`s content's dimensions should be 250x250 px`, () => {
+        const modal = window.document.createElement('ui-modal');
+
+        document.body.appendChild(modal);
+
+        const overlay = modal.shadowRoot.querySelector('.overlay');
+        const content = overlay.querySelector('.content');
+
+        const contentStyles = getComputedStyle(content);
+        expect(contentStyles.getPropertyValue('width')).toEqual('250px');
+        expect(contentStyles.getPropertyValue('height')).toEqual('250px');
+    });
 });

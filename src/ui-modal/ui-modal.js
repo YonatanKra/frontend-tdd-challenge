@@ -15,6 +15,8 @@ template.innerHTML = `
 
 .content {
     background-color: white;
+    width: 250px;
+    height: 250px;
 }
 </style>
 
