@@ -41,23 +41,35 @@ export class UiModal extends HTMLElement {
     }
 
     open(innerHTML, width = 250, height = 250, background = "rgba(255, 255, 255)", showOverlay = true) {
-        if (innerHTML && typeof innerHTML !== 'string') {
-            throw new Error(`innerHTML argument has to be a string. '${typeof innerHTML}' given`);
+        this._validateArgumentType(innerHTML, 'string', 'innerHTML');
+        this._validateArgumentType(width, 'number', 'width');
+        this._validateArgumentType(height, 'number', 'height');
+        
+        this._validateIsBackgroundColor(background);
+
+        this._setOverlayProperties(showOverlay);
+        this._setContentProperties(innerHTML, width, height, background);
+    }
+
+    _validateArgumentType(argument, type, argumentName) {
+        if (argument && typeof argument !== type) {
+            throw new Error(`${argumentName} argument has to be a ${type}. '${typeof argument}' given`);
         }
-        if (width && typeof width !== 'number') {
-            throw new Error(`width argument has to be a number. '${typeof width}' given`);
-        }
-        if (height && typeof height !== 'number') {
-            throw new Error(`height argument has to be a number. '${typeof height}' given`);
-        }
+    }
+
+    _validateIsBackgroundColor(background) {
         if (background && !isColor(background)) {
             throw new Error(`background argument has to be a valid color. ${background} given`);
         }
+    }
 
+    _setOverlayProperties(showOverlay) {
         const overlay = this._shadowRoot.querySelector('.overlay.overlay-hidden')
         overlay.className = 'overlay';
         overlay.style.background = showOverlay ? 'rgba(0, 0, 0, 0.42)' : 'rgba(0, 0, 0, 0)'; 
+    }
 
+    _setContentProperties(innerHTML, width, height, background) {
         const content = this._shadowRoot.querySelector('.content');
 
         content.innerHTML = innerHTML;
