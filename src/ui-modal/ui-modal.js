@@ -1,5 +1,16 @@
 const template = document.createElement('template');
 template.innerHTML = `
+<style>
+.overlay {
+    background-color: rgba(0, 0, 0, 0.42);
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+}
+</style>
+
 <div class="overlay">
     <div class="content"></div>
 </div>

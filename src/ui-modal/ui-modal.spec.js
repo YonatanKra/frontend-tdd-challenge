@@ -22,4 +22,15 @@ describe('UiModal', () => {
 
         expect(content.length).toEqual(1);
     });
+
+    it('s overlay background color should be black with opacity (rgba(0, 0, 0, 0.42))', () => {
+        const modal = window.document.createElement('ui-modal');
+
+        document.body.appendChild(modal);
+
+        const overlay = modal.shadowRoot.querySelector('.overlay');
+
+        const backgroundColor = getComputedStyle(overlay).getPropertyValue('background-color');
+        expect(backgroundColor).toEqual('rgba(0, 0, 0, 0.42)');
+    });
 });
