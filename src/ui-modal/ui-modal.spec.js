@@ -10,4 +10,11 @@ describe('UiModal', () => {
 
         expect(customElements.get('ui-modal')).toBeDefined();
     });
+
+    it('should have an overlay', () => {
+        const modal = window.document.createElement('ui-modal');
+        const overlay = modal.shadowRoot.querySelectorAll('.overlay');
+
+        expect(overlay.length).toEqual(1);
+    });
 });
