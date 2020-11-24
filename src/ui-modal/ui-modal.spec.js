@@ -1,5 +1,13 @@
 import { UiModal } from './ui-modal';
 
+const createAndRenderModal = () => {
+    const modal = window.document.createElement('ui-modal');
+
+    document.body.appendChild(modal);
+
+    return modal;
+}
+
 describe('UiModal', () => {
     it(`should be defined`, () => {
         expect(UiModal).toBeDefined();
@@ -24,9 +32,7 @@ describe('UiModal', () => {
     });
 
     it('s overlay background color should be black with opacity (rgba(0, 0, 0, 0.42)) if not specified', () => {
-        const modal = window.document.createElement('ui-modal');
-
-        document.body.appendChild(modal);
+        const modal = createAndRenderModal();
         
         modal.open();
 
@@ -47,9 +53,7 @@ describe('UiModal', () => {
     });
 
     it('s content area should be in the center of the screen', () => {
-        const modal = window.document.createElement('ui-modal');
-
-        document.body.appendChild(modal);
+        const modal = createAndRenderModal();
 
         const overlay = modal.shadowRoot.querySelector('.overlay');
 
@@ -59,9 +63,7 @@ describe('UiModal', () => {
     });
 
     it(`s content's background color should be white`, () => {
-        const modal = window.document.createElement('ui-modal');
-
-        document.body.appendChild(modal);
+        const modal = createAndRenderModal();
 
         const overlay = modal.shadowRoot.querySelector('.overlay');
         const content = overlay.querySelector('.content');
@@ -71,9 +73,7 @@ describe('UiModal', () => {
     });
 
     it('should be invisible on init', () => {
-        const modal = window.document.createElement('ui-modal');
-
-        document.body.appendChild(modal);
+        const modal = createAndRenderModal();
 
         const overlay = modal.shadowRoot.querySelector('.overlay');
         const overlayStyles = getComputedStyle(overlay);
@@ -82,9 +82,7 @@ describe('UiModal', () => {
     });
 
     it('turns the modal visible', () => {
-        const modal = window.document.createElement('ui-modal');
-
-        document.body.appendChild(modal);
+        const modal = createAndRenderModal();
 
         const overlay = modal.shadowRoot.querySelector('.overlay');
         
@@ -95,9 +93,7 @@ describe('UiModal', () => {
     });
 
     it('gets a string of HTML and add it to the content area', () => {
-        const modal = window.document.createElement('ui-modal');
-
-        document.body.appendChild(modal);
+        const modal = createAndRenderModal();
 
         const stringOfHtml = '<b>Some bold text</b>';
         
@@ -108,9 +104,7 @@ describe('UiModal', () => {
     });
 
     it(`should get width and height parameters and set the content's area accordingly`, () => {
-        const modal = window.document.createElement('ui-modal');
-
-        document.body.appendChild(modal);
+        const modal = createAndRenderModal();
 
         modal.open('Text', 420, 666);
 
@@ -123,9 +117,7 @@ describe('UiModal', () => {
     });
 
     it(`should set the content's area to 250x250 pixels if not specified`, () => {
-        const modal = window.document.createElement('ui-modal');
-
-        document.body.appendChild(modal);
+        const modal = createAndRenderModal();
 
         modal.open('Text');
 
@@ -138,9 +130,7 @@ describe('UiModal', () => {
     });
 
     it(`should get a background property and set the content's area's background accordingly`, () => {
-        const modal = window.document.createElement('ui-modal');
-
-        document.body.appendChild(modal);
+        const modal = createAndRenderModal();
 
         modal.open('Text', 420, 666, 'rgb(255, 0, 0)');
 
@@ -152,9 +142,7 @@ describe('UiModal', () => {
     });
 
     it(`should get a showOverlay property and show/hide the overlay accordingly - true`, () => {
-        const modal = window.document.createElement('ui-modal');
-
-        document.body.appendChild(modal);
+        const modal = createAndRenderModal();
 
         modal.open('Text', 420, 666, 'rgb(255, 0, 0, 0.5)', true);
 
@@ -165,9 +153,7 @@ describe('UiModal', () => {
     });
 
     it(`should get a showOverlay property and show/hide the overlay accordingly - false`, () => {
-        const modal = window.document.createElement('ui-modal');
-
-        document.body.appendChild(modal);
+        const modal = createAndRenderModal();
 
         modal.open('Text', 420, 666, 'rgb(255, 0, 0, 0.5)', false);
 
@@ -178,9 +164,7 @@ describe('UiModal', () => {
     });
 
     it('turns the modal invisible', () => {
-        const modal = window.document.createElement('ui-modal');
-
-        document.body.appendChild(modal);
+        const modal = createAndRenderModal();
 
         modal.open();
         modal.close();
@@ -191,9 +175,7 @@ describe('UiModal', () => {
     });
 
     it('s overlay area should appear above all content of the website', () => {
-        const modal = window.document.createElement('ui-modal');
-
-        document.body.appendChild(modal);
+        const modal = createAndRenderModal();
 
         modal.open();
 
