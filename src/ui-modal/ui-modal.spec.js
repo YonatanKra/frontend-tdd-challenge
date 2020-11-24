@@ -9,6 +9,13 @@ const createAndRenderModal = () => {
 }
 
 describe('UiModal', () => {
+    afterEach(() => {
+        const uiModalInDom = window.document.querySelector('ui-modal');
+        if (uiModalInDom) {
+            uiModalInDom.remove();
+        }
+    });
+
     it(`should be defined`, () => {
         expect(UiModal).toBeDefined();
     });
